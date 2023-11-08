@@ -71,6 +71,9 @@ android {
 
 dependencies {
 
+    implementation project(':foundation:core')
+    implementation project(':foundation:styling')
+
     implementation "com.google.android.flexbox:flexbox:${versions.flexbox}"
     implementation "androidx.activity:activity-ktx:${versions.activity_ktx}"
     implementation "androidx.fragment:fragment-ktx:${versions.fragment_ktx}"

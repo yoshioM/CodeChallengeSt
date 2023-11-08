@@ -1,0 +1,16 @@
+apply from: rootProject.file("gradle-scripts/shared-config/android.gradle")
+
+android {
+    namespace 'com.yoshio.core'
+}
+
+dependencies {
+
+    implementation "androidx.appcompat:appcompat:${versions.androidx_appcompat}"
+    implementation "androidx.preference:preference:${versions.androidx_preference}"
+
+    implementation "androidx.security:security-crypto:${versions.security_crypto}"
+
+    api "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+}

@@ -1,0 +1,24 @@
+plugins {
+    id('kotlin-kapt')
+}
+
+apply from: rootProject.file("gradle-scripts/shared-config/android.gradle")
+
+dependencies {
+
+    api "androidx.core:core-ktx:${versions.androidx_core}"
+
+    api "androidx.appcompat:appcompat:${versions.androidx_appcompat}"
+    api "com.google.android.material:material:${versions.material_version}"
+
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx_lifecycle}"
+    api "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle_extension}"
+    api "androidx.lifecycle:lifecycle-runtime:${versions.androidx_lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${versions.androidx_lifecycle}"
+
+}
+
+android {
+    namespace 'com.yoshio.styling'
+}
+

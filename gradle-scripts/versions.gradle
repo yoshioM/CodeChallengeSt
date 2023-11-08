@@ -24,5 +24,10 @@ ext {
             'firebase_perf_plugin'       : '1.4.2',
             'flexbox'                    : '3.0.0',
             'firebase_bom'               : '32.0.0',
+            'androidx_appcompat'         : '1.6.1',
+            'material_version'           : '1.7.0',
+            'lifecycle_extension'        : '2.2.0',
+            'security_crypto'            : '1.0.0',
+            'androidx_preference'        : '1.2.0',
     ]
 }
