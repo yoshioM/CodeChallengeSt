@@ -1,0 +1,28 @@
+ext {
+
+    gradle_version = '7.4.0'
+    kotlin_version = '1.8.10'
+    jacoco_version = '0.8.8'
+    google_services_version = '4.3.14'
+
+    firebase_performance_version = '1.4.2'
+
+    compileSdk = 34
+    minSdk = 26
+    targetSdk = 30
+    javaVersion = 17
+
+    versions = [
+            'androidx_lifecycle'         : '2.5.1',
+            'androidx_navigation_ktx'    : '2.7.1',
+            'activity_ktx'               : '1.7.2',
+            'fragment_ktx'               : '1.6.1',
+            'dagger'                     : '2.46',
+            'junit'                      : '4.13.2',
+            'play_services_basement'     : '18.2.0',
+            'androidx_navigation_safe'   : '2.5.3',
+            'firebase_perf_plugin'       : '1.4.2',
+            'flexbox'                    : '3.0.0',
+            'firebase_bom'               : '32.0.0',
+    ]
+}

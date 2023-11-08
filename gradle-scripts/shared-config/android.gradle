@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "../../gradle-scripts/quality-checker.gradle"
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets.forEach {
+        it.java.srcDirs = ["src/$it.name/kotlin"]
+    }
+
+    sourceSets {
+        test.java.srcDirs += "src/sharedTest/kotlin"
+        androidTest.java.srcDirs += "src/sharedTest/kotlin"
+    }
+
+    compileOptions {
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
+    }
+}

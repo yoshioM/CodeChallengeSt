@@ -1,0 +1,94 @@
+plugins {
+    id('com.android.application')
+    id('kotlin-android')
+    id('kotlin-kapt')
+    id('kotlin-parcelize')
+    id('com.google.gms.google-services')
+    id('com.google.devtools.ksp')
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdk
+
+    defaultConfig {
+        versionCode code_version
+        versionName name_version
+        applicationId "com.yoshio.challenge"
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            testCoverageEnabled true
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    sourceSets.forEach {
+        it.java.srcDirs = ["src/$it.name/kotlin"]
+    }
+
+    sourceSets {
+        main {
+            test.java.srcDirs += "src/sharedTest/kotlin"
+            androidTest.java.srcDirs += "src/sharedTest/kotlin"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1', 'META-INF/licenses/ASM', '**/attach_hotspot_windows.dll']
+        }
+    }
+    lint {
+        disable 'NullSafeMutableLiveData', 'Instantiatable'
+    }
+
+    namespace 'com.yoshio.challenge'
+}
+
+dependencies {
+
+    implementation "com.google.android.flexbox:flexbox:${versions.flexbox}"
+    implementation "androidx.activity:activity-ktx:${versions.activity_ktx}"
+    implementation "androidx.fragment:fragment-ktx:${versions.fragment_ktx}"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx_navigation_ktx}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx_navigation_ktx}"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx_lifecycle}"
+
+    implementation platform("com.google.firebase:firebase-bom:${versions.firebase_bom}")
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-perf-ktx'
+    implementation "com.google.android.gms:play-services-basement:${versions.play_services_basement}"
+
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}

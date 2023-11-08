@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "920640308593",
+    "project_id": "storichallenge-1b5be",
+    "storage_bucket": "storichallenge-1b5be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920640308593:android:ff06b367f5967c676362d0",
+        "android_client_info": {
+          "package_name": "com.yoshio.challenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3V5o0jH7HoCGLKghFqgYgZDKFt7v-6-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

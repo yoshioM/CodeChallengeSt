@@ -1,0 +1,104 @@
+apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'jacoco'
+
+detekt {
+    config = files("$rootDir/gradle-scripts/detekt/detekt-config.yml")
+    reports {
+        xml {
+            enabled = true
+            destination = file("$project.projectDir/build/reports/detekt.xml")
+        }
+        html {
+            enabled = true
+            destination = file("$project.projectDir/build/reports/detekt.html")
+        }
+    }
+}
+
+def fileFilter = ['**/R.class',
+                  '**/R$*.class',
+                  '**/BR.class',
+                  '**/*Binding.class',
+                  '**/*$ViewInjector*.*',
+                  '**/BuildConfig.*',
+                  '**/Manifest*.*',
+                  '**/src/test/java/**/*.*',
+                  '**/src/*Test/java/**/*.*',
+                  '**/src/test/kotlin/**/*.*',
+                  '**/src/*Test/kotlin/**/*.*',
+                  '**/*$InjectAdapter.class',
+                  '**/*$ModuleAdapter.class',
+                  '**/*Module.class',
+                  '**/*Module_*Factory.class',
+                  '**/*$$*',
+                  '**/*_MembersInjector.class',
+                  '*/*_MembersInjector*.*',
+                  '**/Dagger*Component.class',
+                  '**/Dagger*Component$Builder.class',
+                  '**/ActivityBinder_Bind*Activity.class',
+                  '**/*Module_*Factory.class',
+                  '**/*_Factory.class',
+                  '**/*_*Factory*.*',
+                  '*/*Component*.*',
+                  '**/*Module.class',
+                  '**/*Module*.*',
+                  '**/*ComponentImpl.class',
+                  '**/*SubComponentBuilder.class',
+                  '**/*Module_Bind*.class',
+                  '**/*_Impl*',
+                  '**/*Component.class',
+                  '**/*ViewModelFactory.class',
+                  'android/**/*.*',
+                  '**/*Activity*.*',
+                  '**/*Fragment*.*'
+]
+
+project.afterEvaluate {
+
+    def buildTypes = android.buildTypes.collect { type -> type.name }
+    def productFlavors = android.productFlavors.collect { flavor -> flavor.name }
+
+    if (!productFlavors) productFlavors.add('')
+
+    productFlavors.each { productFlavorName ->
+        buildTypes.each { buildTypeName ->
+            def sourceName, sourcePath
+            if (!productFlavorName) {
+                sourceName = sourcePath = "${buildTypeName}"
+            } else {
+                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+                sourcePath = "${productFlavorName}/${buildTypeName}"
+            }
+            def testTaskName = "test${sourceName.capitalize()}UnitTest"
+
+            task "${testTaskName}Coverage"(type: JacocoReport, dependsOn: "$testTaskName") {
+                group = "Reporting"
+                description = "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
+
+                def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/$productFlavorName/$buildTypeName", excludes: fileFilter)
+                def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/$sourceName", excludes: fileFilter)
+                def coverageSourceDirs = [android.sourceSets.main.java.srcDirs, "src/$productFlavorName/java",
+                                          "src/main/kotlin", "src/$productFlavorName/kotlin"]
+
+                sourceDirectories.from = files(coverageSourceDirs)
+                additionalSourceDirs.from = files(coverageSourceDirs)
+                classDirectories.from = files([debugTree, kotlinDebugTree])
+                executionData.from = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+
+                reports {
+                    xml { enabled true }
+                    html { enabled true }
+                }
+            }
+        }
+    }
+
+    check.finalizedBy 'jacocoFullTestReport'
+}
+
+task jacocoFullTestReport {
+    group = 'reporting'
+    description = 'Generate Jacoco coverage reports after running tests.'
+
+    dependsOn tasks.withType(JacocoReport)
+}

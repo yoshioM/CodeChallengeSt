@@ -1,0 +1,45 @@
+buildscript {
+
+    apply from: rootProject.file("gradle-scripts/versions.gradle")
+
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.gms:google-services:$google_services_version"
+        classpath "com.google.firebase:perf-plugin:$firebase_performance_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.androidx_navigation_safe"
+        classpath "com.google.firebase:perf-plugin:$versions.firebase_perf_plugin"
+    }
+}
+
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.18.1"
+    id "com.google.devtools.ksp" version "1.8.10-1.0.9"
+}
+
+subprojects {
+    if (it.name == 'app') {
+        apply from: rootProject.file("gradle-scripts/quality-checker.gradle")
+    }
+    apply from: rootProject.file("gradle-scripts/distribution/app-distribution.gradle")
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

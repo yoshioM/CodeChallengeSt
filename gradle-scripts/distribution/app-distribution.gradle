@@ -1,0 +1,45 @@
+import java.text.SimpleDateFormat
+
+ext {
+    versionProperties = getVersionProperties(rootProject.file("gradle-scripts/distribution/challenge-version.properties"))
+    name_version = getNameVersion(versionProperties)
+    code_version = getCodeVersion(versionProperties)
+    date_version = generateBuildTime()
+}
+
+private static def getNameVersion(Properties properties) {
+    int versionMajor = getVersionMajor(properties)
+    int versionMinor = getVersionMinor(properties)
+    int versionPatch = getVersionPatch(properties)
+    return "${versionMajor}.${versionMinor}.${versionPatch}"
+}
+
+private static def getCodeVersion(Properties properties) {
+    int versionMajor = getVersionMajor(properties)
+    int versionMinor = getVersionMinor(properties)
+    int versionPatch = getVersionPatch(properties)
+    return versionMajor * 10000 + versionMinor * 100 + versionPatch
+}
+
+private static def getVersionMajor(Properties properties) {
+    return properties['MAJOR'].toInteger()
+}
+
+private static def getVersionMinor(Properties properties) {
+    return properties['MINOR'].toInteger()
+}
+
+private static def getVersionPatch(Properties properties) {
+    return properties['PATCH'].toInteger()
+}
+
+private static def getVersionProperties(File file) {
+    Properties properties = new Properties()
+    InputStream is = new ByteArrayInputStream(file.getBytes())
+    properties.load(is)
+    return properties
+}
+
+private static def generateBuildTime() {
+    return new SimpleDateFormat("dd/MM/yyyy - hh:mm aa").format(new Date())
+}

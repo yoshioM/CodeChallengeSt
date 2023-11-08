@@ -16,3 +16,5 @@
 /app/debug/
 /app/release/
 apks/
+.reports
+**/jacoco.exec
