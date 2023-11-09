@@ -24,7 +24,11 @@
         </activity>
 
         <activity
-            android:name=".account.auth.ui.AuthActivity"
+            android:name=".account.auth.ui.signIn.AuthActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".account.auth.ui.signUp.SignUpActivity"
             android:screenOrientation="portrait" />
 
         <activity

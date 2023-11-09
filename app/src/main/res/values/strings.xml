@@ -2,14 +2,19 @@
     <string name="app_name">Stori Code Chalenge</string>
 
     <!-- Login -->
-    <string name="sign_in_title">Login</string>
+    <string name="sign_in_title">Inicia sesión</string>
     <string name="mail_hint">Correo electronico</string>
     <string name="password_hint">Contraseña</string>
+    <string name="confirm_password_hint">Repite contraseña</string>
     <string name="enter_button">Entrar</string>
     <string name="error_empty_email">Ingrese un correo electrónico</string>
     <string name="error_invalid_email">Correo electrónico no válido</string>
     <string name="error_empty_password">Ingrese contraseña</string>
+    <string name="no_account">Aun no tienes una cuenta?</string>
 
     <!-- Sign Up -->
-
+    <string name="sign_up_title">Crea tu cuenta</string>
+    <string name="name_hint">Nombre</string>
+    <string name="last_name_hint">Apellido</string>
+    <string name="sign_up_button">Registrate</string>
 </resources>

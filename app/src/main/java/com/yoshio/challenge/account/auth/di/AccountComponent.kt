@@ -1,6 +1,7 @@
 package com.yoshio.challenge.account.auth.di
 
-import com.yoshio.challenge.account.auth.ui.SignInFragment
+import com.yoshio.challenge.account.auth.ui.signIn.SignInFragment
+import com.yoshio.challenge.account.auth.ui.signUp.SignUpFragment
 import com.yoshio.core.di.CoreComponent
 import com.yoshio.core.di.scope.FeatureScope
 import dagger.Component
@@ -19,4 +20,6 @@ interface AccountComponent {
     }
 
     fun inject(signInFragment: SignInFragment)
+
+    fun inject(signUpFragment: SignUpFragment)
 }

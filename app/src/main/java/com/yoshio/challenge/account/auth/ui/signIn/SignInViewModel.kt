@@ -1,11 +1,12 @@
-package com.yoshio.challenge.account.auth.ui
+package com.yoshio.challenge.account.auth.ui.signIn
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yoshio.challenge.account.auth.domain.SingInUseCase
-import com.yoshio.challenge.account.auth.ui.SignInActions.OpenHome
+import com.yoshio.challenge.account.auth.ui.signIn.SignInActions.OpenHome
+import com.yoshio.challenge.account.auth.ui.signIn.SignInActions.OpenSignUp
 import com.yoshio.core.coroutines.CoroutinesDispatchers
 import com.yoshio.core.flow.Result
 import com.yoshio.styling.livedata.Event
@@ -22,7 +23,7 @@ class SignInViewModel @Inject constructor(private val singInUseCase: SingInUseCa
     val signInUiModelState: LiveData<Event<SignInUiModel>>
         get() = _signInUiModelState
 
-    protected val mutableNavigateToSignInAction = MutableLiveData<Event<SignInActions>>()
+    private val mutableNavigateToSignInAction = MutableLiveData<Event<SignInActions>>()
 
     val navigateToSignInAction: LiveData<Event<SignInActions>>
         get() = mutableNavigateToSignInAction
@@ -58,7 +59,11 @@ class SignInViewModel @Inject constructor(private val singInUseCase: SingInUseCa
                 exception = exception))
     }
 
-    fun navigateToSignAction() {
+    fun navigateToHomeAction() {
         mutableNavigateToSignInAction.value = Event(OpenHome)
+    }
+
+    fun navigateToSignUpAction() {
+        mutableNavigateToSignInAction.value = Event(OpenSignUp)
     }
 }

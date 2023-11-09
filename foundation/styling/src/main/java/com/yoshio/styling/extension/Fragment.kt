@@ -1,5 +1,7 @@
 package com.yoshio.styling.extension
 
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -32,3 +34,8 @@ fun <T> Fragment.viewBinding(initialise: () -> T): ReadOnlyProperty<Fragment, T>
 
             override fun getValue(thisRef: Fragment, property: KProperty<*>): T = this.binding ?: initialise().also { this.binding = it }
         }
+
+fun Fragment.setSupportActionBar(toolbar: Toolbar?) = (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+fun Fragment.setOnToolbarBackPressed(toolbar: Toolbar) =
+        toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }

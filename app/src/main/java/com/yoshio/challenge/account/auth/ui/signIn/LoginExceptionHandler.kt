@@ -1,10 +1,10 @@
-package com.yoshio.challenge.account.auth.ui
+package com.yoshio.challenge.account.auth.ui.signIn
 
 import androidx.annotation.StringRes
 import com.yoshio.challenge.R
-import com.yoshio.challenge.account.auth.ui.LoginException.EmailEmpty
-import com.yoshio.challenge.account.auth.ui.LoginException.EmailInvalid
-import com.yoshio.challenge.account.auth.ui.LoginException.PasswordEmpty
+import com.yoshio.challenge.account.auth.ui.signIn.LoginException.EmailEmpty
+import com.yoshio.challenge.account.auth.ui.signIn.LoginException.EmailInvalid
+import com.yoshio.challenge.account.auth.ui.signIn.LoginException.PasswordEmpty
 import com.yoshio.styling.extension.isValidEmail
 import javax.inject.Inject
 

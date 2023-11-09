@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.View.ALPHA
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.yoshio.challenge.account.auth.ui.AuthActivity
-import com.yoshio.challenge.account.auth.ui.AuthEntryPoint
+import com.yoshio.challenge.account.auth.ui.signIn.AuthActivity
+import com.yoshio.challenge.account.auth.ui.signIn.AuthEntryPoint
 import com.yoshio.challenge.databinding.ActivitySplashBinding
 import com.yoshio.challenge.splash.SplashActions.HOME
 import com.yoshio.challenge.splash.SplashActions.SIGN_IN

@@ -1,4 +1,4 @@
-package com.yoshio.challenge.account.auth.ui
+package com.yoshio.challenge.account.auth.ui.signIn
 
 import android.os.Bundle
 import android.view.View
@@ -6,16 +6,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.yoshio.challenge.R
 import com.yoshio.challenge.account.auth.di.initDagger
-import com.yoshio.challenge.account.auth.ui.LoginException.EmailEmpty
-import com.yoshio.challenge.account.auth.ui.LoginException.EmailInvalid
-import com.yoshio.challenge.account.auth.ui.LoginException.PasswordEmpty
-import com.yoshio.challenge.account.auth.ui.SignInActions.OpenHome
+import com.yoshio.challenge.account.auth.ui.signIn.LoginException.EmailEmpty
+import com.yoshio.challenge.account.auth.ui.signIn.LoginException.EmailInvalid
+import com.yoshio.challenge.account.auth.ui.signIn.LoginException.PasswordEmpty
+import com.yoshio.challenge.account.auth.ui.signIn.SignInActions.OpenHome
+import com.yoshio.challenge.account.auth.ui.signIn.SignInActions.OpenSignUp
+import com.yoshio.challenge.account.auth.ui.signUp.SignUpActivity
 import com.yoshio.challenge.account.home.ui.HomeActivity
 import com.yoshio.challenge.databinding.FragmentSignInBinding
 import com.yoshio.core.di.viewmodel.ViewModelProviderFactory
 import com.yoshio.styling.extension.dismissKeyboard
 import com.yoshio.styling.extension.getString
 import com.yoshio.styling.extension.liveEventObserve
+import com.yoshio.styling.extension.setOnSingleClickListener
 import com.yoshio.styling.extension.showError
 import com.yoshio.styling.extension.snackbar
 import com.yoshio.styling.extension.viewBinding
@@ -44,6 +47,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             signInViewModel.login(email = binding.signInEditMail.getString(), password = binding.signInEditPassword.getString())
             binding.signInButton.dismissKeyboard()
         }
+
+        binding.signUpButton.setOnSingleClickListener { signInViewModel.navigateToSignUpAction() }
     }
 
     private fun cleanErrors() {
@@ -62,7 +67,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         if (exception != null) showErrorSnackBar(exception)
     }
 
-    private fun signInUiSuccess() = signInViewModel.navigateToSignAction()
+    private fun signInUiSuccess() = signInViewModel.navigateToHomeAction()
 
     private fun showErrorSnackBar(exception: Exception) = exception.run {
         when (this) {
@@ -76,11 +81,14 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private fun openSignInActions(signInActions: SignInActions) {
         val intent = when (signInActions) {
             OpenHome -> launchHomeActivity()
+            OpenSignUp -> launchSignUpActivity()
         }
         startActivity(intent)
     }
 
     private fun launchHomeActivity() = HomeActivity.createClearIntent(requireContext())
+
+    private fun launchSignUpActivity() = SignUpActivity.createIntent(requireContext())
 
 
     override fun onDestroyView() {

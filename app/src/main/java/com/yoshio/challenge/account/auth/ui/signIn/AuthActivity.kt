@@ -1,10 +1,10 @@
-package com.yoshio.challenge.account.auth.ui
+package com.yoshio.challenge.account.auth.ui.signIn
 
 import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import com.yoshio.challenge.R
-import com.yoshio.challenge.account.auth.ui.AuthEntryPoint.SIGN_IN
+import com.yoshio.challenge.account.auth.ui.signIn.AuthEntryPoint.SIGN_IN
 import com.yoshio.styling.extension.clearIntentTo
 import com.yoshio.styling.views.CompatBindingFragActivity
 
