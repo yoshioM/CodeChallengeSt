@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.yoshio.core.coroutines.CoroutinesDispatchers
+import com.yoshio.core.exceptions.ApiExceptionHandler
 import com.yoshio.core.network.NetworkModule
 import com.yoshio.core.preferences.di.PreferencesModule
 import dagger.BindsInstance
@@ -33,5 +34,7 @@ interface CoreComponent {
     fun provideFirebaseAuth(): FirebaseAuth
 
     fun provideFirebaseFirestore(): FirebaseFirestore
+
+    fun provideApiExceptionHandler(): ApiExceptionHandler
 
 }

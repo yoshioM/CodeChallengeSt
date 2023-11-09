@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">core</string>
+    <string name="error_auth_invalid_user">Invalid user.</string>
+    <string name="error_auth_invalid_credentials">Invalid credentials.</string>
+    <string name="error_auth">Login failed</string>
+    <string name="error_unknown">Unknown error</string>
 </resources>
