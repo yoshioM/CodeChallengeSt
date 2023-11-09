@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stori Code Chalenge</string>
+
+    <!-- Login -->
+    <string name="sign_in_title">Sign in</string>
+    <string name="mail_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="enter_button">Login</string>
+
+    <!-- Sign Up -->
+</resources>

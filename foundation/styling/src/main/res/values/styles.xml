@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PrimaryTitlePage">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/giant_text</item>
+    </style>
+
+    <style name="PrimaryButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="rippleColor">@color/white_degraded</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="backgroundTint">@color/primary_button_color</item>
+    </style>
+
+    <style name="Input.ThemeOverlay" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorControlActivated">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="Input.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">@dimen/inter_text</item>
+        <item name="boxStrokeColor">@color/text_input_border</item>
+        <item name="hintTextColor">@color/textColorPrimary</item>
+        <item name="android:textColorHint">@color/textColorSecondary</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_layout_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_layout_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_layout_corner_radius</item>
+        <item name="boxCornerRadiusTopStart">@dimen/input_layout_corner_radius</item>
+        <item name="materialThemeOverlay">@style/Input.ThemeOverlay</item>
+    </style>
+
+</resources>
