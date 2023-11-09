@@ -27,6 +27,10 @@
             android:name=".account.auth.ui.AuthActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".account.home.ui.HomeActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

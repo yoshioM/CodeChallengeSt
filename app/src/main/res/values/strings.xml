@@ -6,6 +6,9 @@
     <string name="mail_hint">Correo electronico</string>
     <string name="password_hint">Contraseña</string>
     <string name="enter_button">Entrar</string>
+    <string name="error_empty_email">Ingrese un correo electrónico</string>
+    <string name="error_invalid_email">Correo electrónico no válido</string>
+    <string name="error_empty_password">Ingrese contraseña</string>
 
     <!-- Sign Up -->
 

@@ -13,4 +13,8 @@
 
     <color name="gray57">#575657</color>
     <color name="yellow_degraded_twenty">#1FFACE39</color>
+
+    <color name="success_snackbar">#33856d</color>
+    <color name="warning_snackbar">#fbdc74</color>
+    <color name="error_snackbar">#df606e</color>
 </resources>
