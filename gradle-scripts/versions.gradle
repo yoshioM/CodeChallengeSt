@@ -8,7 +8,7 @@ ext {
     firebase_performance_version = '1.4.2'
 
     compileSdk = 34
-    minSdk = 26
+    minSdk = 28
     targetSdk = 30
     javaVersion = 17
 
@@ -29,5 +29,6 @@ ext {
             'lifecycle_extension'        : '2.2.0',
             'security_crypto'            : '1.0.0',
             'androidx_preference'        : '1.2.0',
+            'firestore'                  :'24.9.1'
     ]
 }

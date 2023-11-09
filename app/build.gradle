@@ -86,6 +86,9 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:${versions.firebase_bom}")
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-perf-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation "com.google.firebase:firebase-firestore-ktx:${versions.firestore}"
+
     implementation "com.google.android.gms:play-services-basement:${versions.play_services_basement}"
 
     implementation "com.google.dagger:dagger:${versions.dagger}"
