@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">styling</string>
+    <string name="permission_required">Hace falta el permiso</string>
+    <string name="permission_required_message">Es necesario brindar el acceso a la camara para poder continuar</string>
 </resources>

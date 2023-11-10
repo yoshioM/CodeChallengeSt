@@ -39,3 +39,9 @@ fun Fragment.setSupportActionBar(toolbar: Toolbar?) = (activity as AppCompatActi
 
 fun Fragment.setOnToolbarBackPressed(toolbar: Toolbar) =
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+
+fun Fragment.showPermissionDialog(title: String, message: String, onAccept: () -> Unit) = context?.showAlertDialog(
+        title = title,
+        message = message,
+        positiveButton = AlertDialogButton(action = { onAccept() })
+)

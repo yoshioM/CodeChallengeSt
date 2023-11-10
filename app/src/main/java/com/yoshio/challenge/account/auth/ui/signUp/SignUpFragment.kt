@@ -2,6 +2,8 @@ package com.yoshio.challenge.account.auth.ui.signUp
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.TakePicture
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.yoshio.challenge.R
@@ -10,6 +12,7 @@ import com.yoshio.challenge.account.auth.ui.signIn.AuthActivity
 import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.OpenLogin
 import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.OpenSuccessSignUp
 import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.OpenTakeId
+import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.RequestCameraPermission
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.ConfirmPasswordEmpty
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.EmailEmpty
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.EmailInvalid
@@ -21,10 +24,14 @@ import com.yoshio.challenge.databinding.FragmentSignUpBinding
 import com.yoshio.core.di.viewmodel.ViewModelProviderFactory
 import com.yoshio.styling.extension.AlertDialogButton
 import com.yoshio.styling.extension.getString
+import com.yoshio.styling.extension.getUriForImage
+import com.yoshio.styling.extension.hasCameraPermission
 import com.yoshio.styling.extension.liveEventObserve
+import com.yoshio.styling.extension.requestCameraPermission
 import com.yoshio.styling.extension.setOnToolbarBackPressed
 import com.yoshio.styling.extension.showAlertDialog
 import com.yoshio.styling.extension.showError
+import com.yoshio.styling.extension.showPermissionDialog
 import com.yoshio.styling.extension.snackbar
 import com.yoshio.styling.extension.viewBinding
 import javax.inject.Inject
@@ -37,6 +44,14 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     lateinit var viewModelProviderFactory: ViewModelProviderFactory<SignUpViewModel>
 
     private val signUpViewModel by viewModels<SignUpViewModel> { viewModelProviderFactory }
+
+    private val requestCamera = registerForActivityResult(ActivityResultContracts.RequestPermission()) { permissionGranted ->
+        signUpViewModel.navigateToTakeIdAction(hasCameraPermission = permissionGranted)
+    }
+
+    private val takeAPhoto = registerForActivityResult(TakePicture()) { hasSaved ->
+        if (hasSaved) signUpViewModel.signUp(getUserData())
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,9 +79,19 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun signUpUi(signUpUiModel: SignUpUiModel) = signUpUiModel.run {
         binding.signUpButton.showProgress(showProgress)
+        if (isIdRequired) openTakeIdPhoto()
         if (isRegisterSuccess) signUpUiSuccess()
         if (exception != null) showErrorSnackBar(exception)
     }
+
+    private fun openTakeIdPhoto() = requireContext().showAlertDialog(
+            title = getString(R.string.id_required_title),
+            message = getString(R.string.id_security),
+            cancelable = false,
+            positiveButton = AlertDialogButton(
+                    action = { signUpViewModel.navigateToTakeIdAction(requireActivity().hasCameraPermission()) }),
+            negativeButton = AlertDialogButton(textButton = getString(R.string.cancel))
+    )
 
     private fun signUpUiSuccess() = signUpViewModel.navigateToRegisterSuccessAction()
 
@@ -96,9 +121,19 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private fun openSignUpActions(signUpActions: SignUpActions) {
         when (signUpActions) {
             OpenSuccessSignUp -> showSuccessDialog()
-            OpenTakeId -> Unit
+            OpenTakeId -> openCamera()
+            RequestCameraPermission -> showPermissionDialog(
+                    title = getString(R.string.permission_required),
+                    message = getString(R.string.permission_required_message),
+                    onAccept = { requestCamera.requestCameraPermission() })
+
             OpenLogin -> launchSignInActivity()
         }
+    }
+
+    private fun openCamera() {
+        val uri = requireContext().getUriForImage(getString(R.string.authority), APP_DIRECTORY)
+        takeAPhoto.launch(uri)
     }
 
     private fun showSuccessDialog() = requireContext().showAlertDialog(
@@ -119,6 +154,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             binding.confirmPasswordEdit.getString())
 
     companion object {
+        const val APP_DIRECTORY = "/challenge_pictures/"
 
         fun newInstance() = SignUpFragment()
     }

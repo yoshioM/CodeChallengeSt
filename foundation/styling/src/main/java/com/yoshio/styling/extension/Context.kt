@@ -4,12 +4,16 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
+import android.os.Environment.DIRECTORY_PICTURES
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.yoshio.styling.R
+import java.io.File
 
 inline fun <reified T : AppCompatActivity> Context.intentTo(): Intent = Intent(this, T::class.java)
 
@@ -78,3 +82,15 @@ fun Context.showAlertDialog(title: String? = null,
 
     dialog.show()
 }
+
+fun Context.getUriForImage(authority: String, directory: String): Uri {
+    val photoFile = File.createTempFile(IMAGE_PREFIX, IMAGE_SUFFIX, getStorageDir(directory))
+    return FileProvider.getUriForFile(this, authority, photoFile)
+}
+
+private fun Context.getStorageDir(directory: String) = File(getExternalFilesDir(DIRECTORY_PICTURES), directory).apply {
+    if (!exists()) mkdirs()
+}
+
+private const val IMAGE_PREFIX = "IMG_"
+private const val IMAGE_SUFFIX = ".jpg"

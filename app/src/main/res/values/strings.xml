@@ -22,4 +22,15 @@
     <string name="sign_up_button">Registrate</string>
     <string name="register_success">Registro exitoso</string>
     <string name="complete_login">Haz login con tus credenciales creadas</string>
+
+    <string name="id_required_title">Se requiere identificacion</string>
+    <string name="id_security">Debes tomar una fotografia a tu identificación por motivos de seguridad (no se almacena)</string>
+
+    <!-- Permissions -->
+    <string name="permission_required">Hace falta el permiso</string>
+    <string name="permission_required_message">Es necesario brindar el acceso a la camara para poder continuar</string>
+
+    <string name="authority" translatable="false">com.yoshio.challenge.fileprovider</string>
+    <string name="cancel">Cancelar</string>
+
 </resources>

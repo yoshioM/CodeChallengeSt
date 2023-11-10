@@ -23,4 +23,13 @@
     <string name="sign_up_button">Register</string>
     <string name="register_success">Registration successful</string>
     <string name="complete_login">Login with your created credentials</string>
+
+    <string name="id_required_title">Identification required</string>
+    <string name="id_security">You must take a photo of your ID for security reasons (it is not stored)</string>
+
+    <!-- Permissions -->
+    <string name="permission_required">Permission required</string>
+    <string name="permission_required_message">It is necessary to provide access to the camera to continue</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

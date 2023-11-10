@@ -8,6 +8,7 @@ import com.yoshio.challenge.account.auth.domain.SignUpUseCase
 import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.OpenLogin
 import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.OpenSuccessSignUp
 import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.OpenTakeId
+import com.yoshio.challenge.account.auth.ui.signUp.SignUpActions.RequestCameraPermission
 import com.yoshio.core.coroutines.CoroutinesDispatchers
 import com.yoshio.core.flow.Result
 import com.yoshio.styling.livedata.Event
@@ -32,36 +33,46 @@ class SignUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCa
     fun validatePersonalData(userData: SignUpData) {
         val (areInvalidCredentials, exception) = validatePersonalDataExceptionHandler.areInvalidData(userData)
         if (areInvalidCredentials) return emitSignUpUiState(exception = exception)
-        emitSignUpUiState(showProgress = true)
-        viewModelScope.launch(coroutinesDispatchers.io) {
-            val result = signUpUseCase.signUp(userData)
-            withContext(coroutinesDispatchers.main) {
-                when (result) {
-                    is Result.Success -> registerSuccess()
-                    is Result.Error -> registerError(result.exception)
-                }
-            }
-        }
+        requiredId()
     }
 
-    private fun registerSuccess() = emitSignUpUiState(isRegisterSuccess = true)
+    private fun requiredId() = emitSignUpUiState(isIdRequired = true)
 
     private fun registerError(exception: Exception) {
         exception.printStackTrace()
         emitSignUpUiState(exception = exception)
     }
 
+    fun signUp(userData: SignUpData) {
+        val (areInvalidCredentials, exception) = validatePersonalDataExceptionHandler.areInvalidData(userData)
+        if (areInvalidCredentials) return emitSignUpUiState(exception = exception)
+        emitSignUpUiState(showProgress = true)
+        viewModelScope.launch(coroutinesDispatchers.io) {
+            val result = signUpUseCase.signUp(userData)
+            withContext(coroutinesDispatchers.main) {
+                when (result) {
+                    is Result.Success -> signUpSuccess()
+                    is Result.Error -> registerError(result.exception)
+                }
+            }
+        }
+    }
+
+    private fun signUpSuccess() = emitSignUpUiState(isRegisterSuccess = true)
+
     private fun emitSignUpUiState(showProgress: Boolean = false,
+                                  isIdRequired: Boolean = false,
                                   isRegisterSuccess: Boolean = false,
                                   exception: Exception? = null) {
         _signUpUiModelState.value = Event(SignUpUiModel(
                 showProgress = showProgress,
+                isIdRequired = isIdRequired,
                 isRegisterSuccess = isRegisterSuccess,
                 exception = exception))
     }
 
-    fun navigateToTakeIdAction() {
-        mutableNavigateToSignUpAction.value = Event(OpenTakeId)
+    fun navigateToTakeIdAction(hasCameraPermission: Boolean) {
+        mutableNavigateToSignUpAction.value = Event(if (hasCameraPermission) OpenTakeId else RequestCameraPermission)
     }
 
     fun navigateToRegisterSuccessAction() {
