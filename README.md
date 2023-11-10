@@ -5,7 +5,7 @@ Android application build with kotlin
 
 ## Features
 
-- Consume Firebase firestor to save ad¿nd get data
+- Consume Firebase firestor to save and get data
 - You can register a new user requesting personal information
 - With the registered credentials you can login
 - In the home of the application you can see the user's name, their balance and the list of movements
