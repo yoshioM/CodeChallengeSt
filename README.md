@@ -21,6 +21,8 @@ Used libraries and technologies
 - [MVVM] - MVVM architecture 
 - [VIEW BINDING] - to access the graphic elements from the class
 
+User demo: yoshio@test.com pass: 123456
+
 Sign up | Login/Home 
 --- | ---
 <video src="https://github.com/yoshioM/CodeChallengeSt/assets/32847159/cdc1a23c-5c32-4a0b-b368-746c5b075c90" width="260"> | <video src="https://github.com/yoshioM/CodeChallengeSt/assets/32847159/fadcad75-7896-4cc9-a6a4-60c2d28e2fe9" width="260">
