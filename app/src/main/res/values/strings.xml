@@ -7,14 +7,19 @@
     <string name="password_hint">Contraseña</string>
     <string name="confirm_password_hint">Repite contraseña</string>
     <string name="enter_button">Entrar</string>
+    <string name="error_empty_name">Ingrese un nombre</string>
+    <string name="error_empty_last_name">Ingrese un apellido</string>
     <string name="error_empty_email">Ingrese un correo electrónico</string>
     <string name="error_invalid_email">Correo electrónico no válido</string>
     <string name="error_empty_password">Ingrese contraseña</string>
     <string name="no_account">Aun no tienes una cuenta?</string>
+    <string name="error_passwords_dont_match">Contraseñas no coinciden</string>
 
     <!-- Sign Up -->
     <string name="sign_up_title">Crea tu cuenta</string>
     <string name="name_hint">Nombre</string>
     <string name="last_name_hint">Apellido</string>
     <string name="sign_up_button">Registrate</string>
+    <string name="register_success">Registro exitoso</string>
+    <string name="complete_login">Haz login con tus credenciales creadas</string>
 </resources>

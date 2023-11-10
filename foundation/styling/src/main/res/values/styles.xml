@@ -31,4 +31,8 @@
         <item name="materialThemeOverlay">@style/Input.ThemeOverlay</item>
     </style>
 
+    <style name="ThemeOverlay_MaterialComponents_Dialog_Alert_Round_Corner" parent="Base.ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="dialogCornerRadius">@dimen/space_12</item>
+        <item name="android:background">@color/colorSecondaryPrimary</item>
+    </style>
 </resources>

@@ -8,14 +8,19 @@
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Repeat password</string>
     <string name="enter_button">Enter</string>
+    <string name="error_empty_name">Enter a name</string>
+    <string name="error_empty_last_name">Enter a last name</string>
     <string name="error_empty_email">Please enter an email</string>
     <string name="error_invalid_email">Invalid email</string>
     <string name="error_empty_password">Enter password</string>
     <string name="no_account">Don\'t have an account yet?</string>
+    <string name="error_passwords_dont_match">Passwords do not match</string>
 
     <!-- Sign Up -->
     <string name="sign_up_title">Create your account</string>
     <string name="name_hint">Name</string>
     <string name="last_name_hint">Last name</string>
     <string name="sign_up_button">Register</string>
+    <string name="register_success">Registration successful</string>
+    <string name="complete_login">Login with your created credentials</string>
 </resources>

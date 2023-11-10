@@ -5,6 +5,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.ColorRes
 import com.yoshio.styling.listeners.SingleClickListener
 
 private const val NO_FLAGS = 0
@@ -20,3 +21,5 @@ fun View.setOnSingleClickListener(onSingleClickListener: ((View) -> Unit)?) {
 fun View.dismissKeyboard() = getInputMethodManager().hideSoftInputFromWindow(this@dismissKeyboard.windowToken, NO_FLAGS)
 
 private fun View.getInputMethodManager() = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+fun View.color(@ColorRes colorRes: Int) = context.color(colorRes)
