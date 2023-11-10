@@ -22,7 +22,7 @@
     <string name="sign_up_button">Registrate</string>
     <string name="register_success">Registro exitoso</string>
     <string name="complete_login">Haz login con tus credenciales creadas</string>
-
+    <string name="num_characters_password">Mínimo 6 caracteres</string>
     <string name="id_required_title">Se requiere identificacion</string>
     <string name="id_security">Debes tomar una fotografia a tu identificación por motivos de seguridad (no se almacena)</string>
 
@@ -38,4 +38,11 @@
     <string name="total_balance">Tu balance es: $%s</string>
     <string name="amount" translatable="false">$%s</string>
 
+    <!-- Transaction detail -->
+    <string name="transaction_detail">Detalle de transacción</string>
+    <string name="type_transaction">Tipo de transacción: %s</string>
+    <string name="date_transaction">Fecha: %s</string>
+    <string name="receiver_transaction">Receptor: %s</string>
+    <string name="sender_transaction">Emisor: %s</string>
+    <string name="amount_transaction">Monto: $%s</string>
 </resources>

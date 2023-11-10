@@ -8,6 +8,7 @@ import com.yoshio.challenge.R
 import com.yoshio.challenge.account.home.di.initDagger
 import com.yoshio.challenge.account.home.ui.HomeActivity.Companion.USER_ID_EXTRA
 import com.yoshio.challenge.account.home.ui.UserDataActions.OpenDetailTransaction
+import com.yoshio.challenge.account.home.ui.transaction.TransactionDetailActivity
 import com.yoshio.challenge.databinding.FragmentHomeBinding
 import com.yoshio.core.di.viewmodel.ViewModelProviderFactory
 import com.yoshio.core.exceptions.ApiRequestException
@@ -17,6 +18,7 @@ import com.yoshio.styling.extension.liveEventObserve
 import com.yoshio.styling.extension.showError
 import com.yoshio.styling.extension.snackbar
 import com.yoshio.styling.extension.viewBinding
+import com.yoshio.styling.extension.visible
 import javax.inject.Inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -60,7 +62,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun userDataUiSuccess(userInfoUiModel: UserInfoUiModel) = userInfoUiModel.run {
         binding.titleTextView.text = getString(R.string.home_title, name, lastName)
+        binding.titleTextView.visible()
         binding.balanceTextView.text = getString(R.string.total_balance, balanceAmount)
+        binding.balanceTextView.visible()
         binding.transactionRecyclerView.run {
             transactionAdapter.set(transactionList)
         }
@@ -73,9 +77,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun userDataActions(userDataActions: UserDataActions) = when (userDataActions) {
-        OpenDetailTransaction -> Unit
+    private fun userDataActions(userDataActions: UserDataActions) = userDataActions.run {
+        when (this) {
+            is OpenDetailTransaction -> navigateToTransactionDetail(transactionUiModel)
+        }
     }
+
+    private fun navigateToTransactionDetail(transactionUiModel: TransactionUiModel) =
+            startActivity(TransactionDetailActivity.createIntent(requireContext(), transactionUiModel))
 
     private fun getUserData() = homeViewModel.getUserData(getUserId())
 

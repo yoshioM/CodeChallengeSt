@@ -10,7 +10,7 @@ data class UserDataUiModel(val showProgress: Boolean,
                            val exception: Exception?)
 
 sealed class UserDataActions {
-    object OpenDetailTransaction : UserDataActions()
+    data class OpenDetailTransaction(val transactionUiModel: TransactionUiModel) : UserDataActions()
 }
 
 data class UserInfoUiModel(

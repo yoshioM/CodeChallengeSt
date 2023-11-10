@@ -9,6 +9,7 @@ import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.LastNameEmp
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.NameEmpty
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.PasswordDontMatchEmpty
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.PasswordEmpty
+import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.PasswordLengthError
 import com.yoshio.styling.extension.isValidEmail
 import javax.inject.Inject
 
@@ -21,10 +22,15 @@ class ValidatePersonalDataExceptionHandler @Inject constructor() {
             email.isBlank() -> Pair(true, EmailEmpty())
             !email.isValidEmail() -> Pair(true, EmailInvalid())
             password.isBlank() -> Pair(true, PasswordEmpty())
+            password.length < CHARACTERS_PASSWORD -> Pair(true, PasswordLengthError())
             confirmPassword.isBlank() -> Pair(true, ConfirmPasswordEmpty())
             password != confirmPassword -> Pair(true, PasswordDontMatchEmpty())
             else -> Pair(false, NoValidationNeeded)
         }
+    }
+
+    companion object {
+        const val CHARACTERS_PASSWORD = 6
     }
 }
 
@@ -34,6 +40,7 @@ sealed class UserDataException : Exception() {
     class EmailEmpty(@StringRes val error: Int = R.string.error_empty_email) : UserDataException()
     class EmailInvalid(@StringRes val error: Int = R.string.error_invalid_email) : UserDataException()
     class PasswordEmpty(@StringRes val error: Int = R.string.error_empty_password) : UserDataException()
+    class PasswordLengthError(@StringRes val error: Int = R.string.num_characters_password) : UserDataException()
     class ConfirmPasswordEmpty(@StringRes val error: Int = R.string.error_empty_password) : UserDataException()
     class PasswordDontMatchEmpty(@StringRes val error: Int = R.string.error_passwords_dont_match) : UserDataException()
 }

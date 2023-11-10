@@ -19,6 +19,10 @@ fun View.hideOrShow(visible: Boolean) {
     visibility = if (visible) VISIBLE else GONE
 }
 
+fun View.visible() {
+    visibility = VISIBLE
+}
+
 fun View.setOnSingleClickListener(onSingleClickListener: ((View) -> Unit)?) {
     setOnClickListener(SingleClickListener { onSingleClickListener?.invoke(it) })
 }

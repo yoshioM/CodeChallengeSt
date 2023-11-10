@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yoshio.challenge.account.home.domain.GetUserDataUseCase
+import com.yoshio.challenge.account.home.ui.UserDataActions.OpenDetailTransaction
 import com.yoshio.core.coroutines.CoroutinesDispatchers
 import com.yoshio.core.flow.Result
 import com.yoshio.styling.livedata.Event
@@ -55,5 +56,7 @@ class HomeViewModel @Inject constructor(private val getUserDataUseCase: GetUserD
                 exception = exception))
     }
 
-    fun navigateToDetail(transactionUiModel: TransactionUiModel) = transactionUiModel.toString()
+    fun navigateToDetail(transactionUiModel: TransactionUiModel) {
+        mutableNavigateToUserDataActions.value = Event(OpenDetailTransaction(transactionUiModel))
+    }
 }

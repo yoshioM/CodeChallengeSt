@@ -20,6 +20,7 @@ import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.LastNameEmp
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.NameEmpty
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.PasswordDontMatchEmpty
 import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.PasswordEmpty
+import com.yoshio.challenge.account.auth.ui.signUp.UserDataException.PasswordLengthError
 import com.yoshio.challenge.databinding.FragmentSignUpBinding
 import com.yoshio.core.di.viewmodel.ViewModelProviderFactory
 import com.yoshio.styling.extension.AlertDialogButton
@@ -102,6 +103,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             is EmailEmpty -> binding.emailInputLayout.error = getString(error)
             is EmailInvalid -> binding.emailInputLayout.error = getString(error)
             is PasswordEmpty -> binding.passwordInputLayout.error = getString(error)
+            is PasswordLengthError -> binding.passwordInputLayout.error = getString(error)
             is ConfirmPasswordEmpty -> binding.confirmPasswordLayout.error = getString(error)
             is PasswordDontMatchEmpty -> binding.confirmPasswordLayout.error = getString(error)
             else -> snackbar(com.yoshio.core.R.string.error_unknown).showError()

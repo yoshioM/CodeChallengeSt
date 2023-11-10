@@ -23,7 +23,7 @@
     <string name="sign_up_button">Register</string>
     <string name="register_success">Registration successful</string>
     <string name="complete_login">Login with your created credentials</string>
-
+    <string name="num_characters_password">Minimum 6 characters</string>
     <string name="id_required_title">Identification required</string>
     <string name="id_security">You must take a photo of your ID for security reasons (it is not stored)</string>
 
@@ -35,4 +35,12 @@
     <!-- Home -->
     <string name="home_title">Welcome %s %s</string>
     <string name="total_balance">Your balance is: %s</string>
+
+    <!-- Transaction detail -->
+    <string name="transaction_detail">Transaction detail</string>
+    <string name="type_transaction">Transaction type: %s</string>
+    <string name="date_transaction">Date: %s</string>
+    <string name="receiver_transaction">Receiver: %s</string>
+    <string name="sender_transaction">Sender: %s</string>
+    <string name="amount_transaction">Amount: $%s</string>
 </resources>

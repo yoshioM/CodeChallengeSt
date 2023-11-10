@@ -42,6 +42,9 @@
             android:name=".account.home.ui.HomeActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".account.home.ui.transaction.TransactionDetailActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
