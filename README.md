@@ -21,9 +21,15 @@ Used libraries and technologies
 - [MVVM] - MVVM architecture 
 - [VIEW BINDING] - to access the graphic elements from the class
 
-DEMO | 
---- | 
-<video src="" width="260"> | 
+Sign up | Login/Home 
+--- | ---
+<video src="https://github.com/yoshioM/CodeChallengeSt/assets/32847159/cdc1a23c-5c32-4a0b-b368-746c5b075c90" width="260"> | <video src="https://github.com/yoshioM/CodeChallengeSt/assets/32847159/fadcad75-7896-4cc9-a6a4-60c2d28e2fe9" width="260">
+
+User auth | User Data
+--- |---
+<img src="https://github.com/yoshioM/CodeChallengeSt/assets/32847159/fde1beb0-7c18-4953-a45b-1e8d7d58a2f7" width="300"> |<img src="https://github.com/yoshioM/CodeChallengeSt/assets/32847159/513b78a5-d0e9-4b9e-affa-6549d4768c74" width="300">
+
+
 
 
    [FIREBASE]: <https://firebase.google.com/docs/firestore/quickstart?hl=es-419#set_up_your_development_environment>
