@@ -26,7 +26,7 @@ class HomeActivity : CompatBindingFragActivity() {
     }
 
     companion object {
-
-        fun createClearIntent(context: Context) = context.clearIntentTo<HomeActivity>()
+        const val USER_ID_EXTRA = "user_id"
+        fun createClearIntent(context: Context, userId: String) = context.clearIntentTo<HomeActivity>().putExtra(USER_ID_EXTRA, userId)
     }
 }

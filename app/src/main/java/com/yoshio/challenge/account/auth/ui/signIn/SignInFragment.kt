@@ -63,11 +63,11 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private fun signInUi(signInUiModel: SignInUiModel) = signInUiModel.run {
         binding.signInButton.showProgress(showProgress)
-        if (isLoginSuccess) signInUiSuccess()
+        if (isLoginSuccess) signInUiSuccess(userId)
         if (exception != null) showErrorSnackBar(exception)
     }
 
-    private fun signInUiSuccess() = signInViewModel.navigateToHomeAction()
+    private fun signInUiSuccess(userId: String) = signInViewModel.navigateToHomeAction(userId)
 
     private fun showErrorSnackBar(exception: Exception) = exception.run {
         when (this) {
@@ -78,17 +78,16 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         }
     }
 
-    private fun openSignInActions(signInActions: SignInActions) {
-        val intent = when (signInActions) {
-            OpenHome -> launchHomeActivity()
-            OpenSignUp -> launchSignUpActivity()
+    private fun openSignInActions(signInActions: SignInActions) = signInActions.run {
+        when (this) {
+            is OpenHome -> launchHomeActivity(userId)
+            is OpenSignUp -> launchSignUpActivity()
         }
-        startActivity(intent)
     }
 
-    private fun launchHomeActivity() = HomeActivity.createClearIntent(requireContext())
+    private fun launchHomeActivity(userId: String) = startActivity(HomeActivity.createClearIntent(requireContext(), userId))
 
-    private fun launchSignUpActivity() = SignUpActivity.createIntent(requireContext())
+    private fun launchSignUpActivity() = startActivity(SignUpActivity.createIntent(requireContext()))
 
 
     override fun onDestroyView() {

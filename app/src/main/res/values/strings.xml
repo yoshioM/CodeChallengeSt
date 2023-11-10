@@ -33,4 +33,8 @@
     <string name="authority" translatable="false">com.yoshio.challenge.fileprovider</string>
     <string name="cancel">Cancelar</string>
 
+    <!--Home -->
+    <string name="home_title">Binvenido %s %s</string>
+    <string name="total_balance">Tu balance es: $%s</string>
+
 </resources>

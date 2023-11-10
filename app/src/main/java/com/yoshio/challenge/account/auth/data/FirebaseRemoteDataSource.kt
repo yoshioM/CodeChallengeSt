@@ -85,19 +85,19 @@ class FirebaseRemoteDataSource @Inject constructor(private val firebaseAuth: Fir
     }
 
     companion object {
-        private const val FIRST_NAME_FIELD = "firstName"
-        private const val LAST_NAME_FIELD = "lastName"
+        const val FIRST_NAME_FIELD = "firstName"
+        const val LAST_NAME_FIELD = "lastName"
         private const val COLLECTION_USERS = "users"
 
         private const val COUNT_DUMMY_DATA = 5
-        private const val BALANCE_FIELD = "balance"
-        private const val COLLECTION_TRANSACTIONS = "transactions"
+        const val BALANCE_FIELD = "balance"
+        const val COLLECTION_TRANSACTIONS = "transactions"
 
-        private const val TYPE_FIELD = "type"
-        private const val AMOUNT_FIELD = "amount"
-        private const val DATE_FIELD = "date"
-        private const val SENDER_FIELD = "sender"
-        private const val RECEIVER_FIELD = "receiver"
+        const val TYPE_FIELD = "type"
+        const val AMOUNT_FIELD = "amount"
+        const val DATE_FIELD = "date"
+        const val SENDER_FIELD = "sender"
+        const val RECEIVER_FIELD = "receiver"
     }
 
 }

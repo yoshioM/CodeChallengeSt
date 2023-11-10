@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.yoshio.challenge.account.auth.domain.SingInUseCase
 import com.yoshio.challenge.account.auth.ui.signIn.SignInActions.OpenHome
 import com.yoshio.challenge.account.auth.ui.signIn.SignInActions.OpenSignUp
+import com.yoshio.challenge.account.home.domain.empty
 import com.yoshio.core.coroutines.CoroutinesDispatchers
 import com.yoshio.core.flow.Result
 import com.yoshio.styling.livedata.Event
@@ -36,14 +37,14 @@ class SignInViewModel @Inject constructor(private val singInUseCase: SingInUseCa
             val result = singInUseCase.login(email, password)
             withContext(coroutinesDispatchers.main) {
                 when (result) {
-                    is Result.Success -> loginSuccess()
+                    is Result.Success -> loginSuccess(result.data.userId)
                     is Result.Error -> loginError(result.exception)
                 }
             }
         }
     }
 
-    private fun loginSuccess() = emitSignInUiState(isLoginSuccess = true)
+    private fun loginSuccess(userId: String) = emitSignInUiState(isLoginSuccess = true, userId = userId)
 
     private fun loginError(exception: Exception) {
         exception.printStackTrace()
@@ -52,15 +53,17 @@ class SignInViewModel @Inject constructor(private val singInUseCase: SingInUseCa
 
     private fun emitSignInUiState(showProgress: Boolean = false,
                                   isLoginSuccess: Boolean = false,
+                                  userId: String = String.empty(),
                                   exception: Exception? = null) {
         _signInUiModelState.value = Event(SignInUiModel(
                 showProgress = showProgress,
                 isLoginSuccess = isLoginSuccess,
+                userId = userId,
                 exception = exception))
     }
 
-    fun navigateToHomeAction() {
-        mutableNavigateToSignInAction.value = Event(OpenHome)
+    fun navigateToHomeAction(userId: String) {
+        mutableNavigateToSignInAction.value = Event(OpenHome(userId))
     }
 
     fun navigateToSignUpAction() {

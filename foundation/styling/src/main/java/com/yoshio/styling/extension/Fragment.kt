@@ -45,3 +45,5 @@ fun Fragment.showPermissionDialog(title: String, message: String, onAccept: () -
         message = message,
         positiveButton = AlertDialogButton(action = { onAccept() })
 )
+
+fun Fragment.getActivityIntent() = activity?.intent

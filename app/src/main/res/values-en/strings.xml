@@ -32,4 +32,7 @@
     <string name="permission_required_message">It is necessary to provide access to the camera to continue</string>
     <string name="cancel">Cancel</string>
 
+    <!-- Home -->
+    <string name="home_title">Welcome %s %s</string>
+    <string name="total_balance">Your balance is: %s</string>
 </resources>

@@ -8,4 +8,5 @@ sealed class ApiRequestException(val messageError: Int) : Exception() {
     class AuthenticationInvalidCredentials : ApiRequestException(R.string.error_auth_invalid_credentials)
     class Unknown : ApiRequestException(R.string.error_unknown)
     class AuthUserCollision: ApiRequestException(R.string.error_collision)
+    class UserNotFoundException: ApiRequestException(R.string.error_user_not_found)
 }
