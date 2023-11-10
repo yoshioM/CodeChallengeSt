@@ -28,11 +28,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val homeViewModel by viewModels<HomeViewModel> { viewModelProviderFactory }
 
+    private val transactionAdapter by lazy { TransactionAdapter() }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initDagger()
         getUserData()
         initObservers()
+        initRecyclerView()
+        initAdapter()
     }
 
     private fun initObservers() {
@@ -40,15 +44,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         liveEventObserve(homeViewModel.navigateToUserDataAction) { userDataActions(it) }
     }
 
+    private fun initRecyclerView() = binding.transactionRecyclerView.run {
+        adapter = transactionAdapter
+    }
+
+    private fun initAdapter() = transactionAdapter.run {
+        onTransactionListener = { homeViewModel.navigateToDetail(it) }
+    }
+
     private fun userDataUi(userDataUiModel: UserDataUiModel) = userDataUiModel.run {
         binding.homeProgressBar.hideOrShow(showProgress)
-        if (userInfoUi != null) userDataUiSuccess(userInfoUi)
+        if (userInfoUiModel != null) userDataUiSuccess(userInfoUiModel)
         if (exception != null) showErrorSnackBar(exception)
     }
 
-    private fun userDataUiSuccess(userInfoUi: UserInfoUi) = userInfoUi.run {
+    private fun userDataUiSuccess(userInfoUiModel: UserInfoUiModel) = userInfoUiModel.run {
         binding.titleTextView.text = getString(R.string.home_title, name, lastName)
         binding.balanceTextView.text = getString(R.string.total_balance, balanceAmount)
+        binding.transactionRecyclerView.run {
+            transactionAdapter.set(transactionList)
+        }
     }
 
     private fun showErrorSnackBar(exception: Exception) = exception.run {

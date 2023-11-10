@@ -6,27 +6,27 @@ import com.yoshio.styling.extension.toStringTwoDecimals
 import java.util.Locale
 
 data class UserDataUiModel(val showProgress: Boolean,
-                           val userInfoUi: UserInfoUi?,
+                           val userInfoUiModel: UserInfoUiModel?,
                            val exception: Exception?)
 
 sealed class UserDataActions {
     object OpenDetailTransaction : UserDataActions()
 }
 
-data class UserInfoUi(
+data class UserInfoUiModel(
         val name: String,
         val lastName: String,
         val balanceAmount: String,
-        val transactionList: List<TransactionUi>)
+        val transactionList: List<TransactionUiModel>)
 
-data class TransactionUi(
+data class TransactionUiModel(
         val type: String,
         val amount: String,
         val date: String,
         val sender: String,
         val receiver: String)
 
-fun UserInfo.toUserInfoUi() = UserInfoUi(
+fun UserInfo.toUserInfoUi() = UserInfoUiModel(
         name = name,
         lastName = lastName,
         balanceAmount = balance.toStringTwoDecimals(Locale.getDefault()),
@@ -34,7 +34,7 @@ fun UserInfo.toUserInfoUi() = UserInfoUi(
 
 fun List<TransactionInfo>.toTransactionListUi() = mapNotNull { it.toTransactionUi() }
 
-fun TransactionInfo.toTransactionUi() = TransactionUi(
+fun TransactionInfo.toTransactionUi() = TransactionUiModel(
         type = type,
         amount = amount.toStringTwoDecimals(Locale.getDefault()),
         date = date,

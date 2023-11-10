@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(private val getUserDataUseCase: GetUserD
         }
     }
 
-    private fun getUserDataSuccess(userInfoUi: UserInfoUi) = emitUserDataUiState(userInfoUi = userInfoUi)
+    private fun getUserDataSuccess(userInfoUiModel: UserInfoUiModel) = emitUserDataUiState(userInfoUiModel = userInfoUiModel)
 
     private fun getUserDataError(exception: Exception) {
         exception.printStackTrace()
@@ -47,11 +47,13 @@ class HomeViewModel @Inject constructor(private val getUserDataUseCase: GetUserD
     }
 
     private fun emitUserDataUiState(showProgress: Boolean = false,
-                                    userInfoUi: UserInfoUi? = null,
+                                    userInfoUiModel: UserInfoUiModel? = null,
                                     exception: Exception? = null) {
         _userDataUiModelState.value = Event(UserDataUiModel(
                 showProgress = showProgress,
-                userInfoUi = userInfoUi,
+                userInfoUiModel = userInfoUiModel,
                 exception = exception))
     }
+
+    fun navigateToDetail(transactionUiModel: TransactionUiModel) = transactionUiModel.toString()
 }

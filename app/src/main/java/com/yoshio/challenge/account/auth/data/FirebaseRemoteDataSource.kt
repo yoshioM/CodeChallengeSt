@@ -62,19 +62,18 @@ class FirebaseRemoteDataSource @Inject constructor(private val firebaseAuth: Fir
 
             val dummyTransactions = generateRandomTransactions(COUNT_DUMMY_DATA)
 
-            val transactionsRef = firestore.collection(COLLECTION_TRANSACTIONS)
-            for (transaction in dummyTransactions) {
-                val transactionMap = mapOf(
-                        TYPE_FIELD to transaction.type,
-                        AMOUNT_FIELD to transaction.amount,
-                        DATE_FIELD to transaction.date,
-                        SENDER_FIELD to transaction.sender,
-                        RECEIVER_FIELD to transaction.receiver
-                )
-
-                val newTransactionRef = transactionsRef.document()
-                batch.set(newTransactionRef, transactionMap)
-            }
+            val transactionsMap = hashMapOf(
+                    COLLECTION_TRANSACTIONS to dummyTransactions.map { transaction ->
+                        hashMapOf(
+                                TYPE_FIELD to transaction.type,
+                                AMOUNT_FIELD to transaction.amount,
+                                DATE_FIELD to transaction.date,
+                                SENDER_FIELD to transaction.sender,
+                                RECEIVER_FIELD to transaction.receiver
+                        )
+                    }
+            )
+            userRef.set(transactionsMap, SetOptions.merge())
 
             batch.commit().await()
 

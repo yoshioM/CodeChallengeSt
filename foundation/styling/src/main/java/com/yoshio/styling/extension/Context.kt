@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Environment.DIRECTORY_PICTURES
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -91,6 +92,8 @@ fun Context.getUriForImage(authority: String, directory: String): Uri {
 private fun Context.getStorageDir(directory: String) = File(getExternalFilesDir(DIRECTORY_PICTURES), directory).apply {
     if (!exists()) mkdirs()
 }
+
+fun Context.drawable(@DrawableRes drawableRes: Int) = ContextCompat.getDrawable(this, drawableRes)
 
 private const val IMAGE_PREFIX = "IMG_"
 private const val IMAGE_SUFFIX = ".jpg"

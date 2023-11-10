@@ -46,4 +46,8 @@
     <!-- InputLayout -->
     <dimen name="input_layout_corner_radius">5dp</dimen>
 
+    <!-- container -->
+    <dimen name="corner_radius">4dp</dimen>
+    <dimen name="dash_width">2dp</dimen>
+    <dimen name="dash_gap">2dp</dimen>
 </resources>

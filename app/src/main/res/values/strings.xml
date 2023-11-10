@@ -36,5 +36,6 @@
     <!--Home -->
     <string name="home_title">Binvenido %s %s</string>
     <string name="total_balance">Tu balance es: $%s</string>
+    <string name="amount" translatable="false">$%s</string>
 
 </resources>
